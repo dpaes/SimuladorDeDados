@@ -17,8 +17,8 @@ public class C_Dados {
     }
 
     @PostMapping("/")
-    public String postIndex(@RequestParam("faces") int faces,
-                            @RequestParam("jogadas") int jogadas,
+    public String postIndex(@RequestParam("qtdFaces") int faces,
+                            @RequestParam("qtdDados") int jogadas,
                             Model model){
         M_Jogada m_jogada = S_Dados.jogarDados(jogadas, faces);
         model.addAttribute("dados",m_jogada.getDados());
