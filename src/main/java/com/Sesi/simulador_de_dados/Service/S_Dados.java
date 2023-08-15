@@ -1,13 +1,26 @@
 package com.Sesi.simulador_de_dados.Service;
 
+import com.Sesi.simulador_de_dados.Model.M_Jogada;
 import org.springframework.stereotype.Service;
+import java.util.Random;
 
 @Service
 public class S_Dados {
-    public static //model com parametro da quantidade dadso e faces
-    // com a soma, maximo e resultado, com vetor das jogadas instanciando um vetor int usando o parametro dados como tamanho do vetor.
-    // usa a classe Random para instanciar o objeto Random para pegar os numeros aleatorios
-    // objeto jogadas recebe posição do de i -1 = resultado
-    // soma recebe resultado, condição if resultado for maior que maximo, maximo recebe resultado
-    // depois objeto do model jogada instancia recebendo as variaveis tratadas.
+    public static M_Jogada jogarDados(int qtdDados, int qtdFaces){
+        int soma = 0;
+        int maximo = 0;
+        int resultado = 0;
+        int[] jogadas = new int[qtdDados];
+        for(int i = 1; i <= qtdDados; i++){
+            Random rand = new Random();
+            resultado = rand.nextInt(qtdFaces) + 1;
+            jogadas[i-1] = resultado;
+            soma += resultado;
+            if(resultado > maximo){
+                maximo = resultado;
+            }
+        }
+        M_Jogada m_jogada = new M_Jogada(soma, jogadas, maximo);
+        return m_jogada;
+    }
 }

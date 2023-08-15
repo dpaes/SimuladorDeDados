@@ -1,5 +1,7 @@
 package com.Sesi.simulador_de_dados.Controller;
 
+import com.Sesi.simulador_de_dados.Model.M_Jogada;
+import com.Sesi.simulador_de_dados.Service.S_Dados;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,11 +17,13 @@ public class C_Dados {
     }
 
     @PostMapping("/")
-    public String postIndex(@RequestParam("faces") Integer faces,
-                            @RequestParam("jogadas") Integer jogadas,
+    public String postIndex(@RequestParam("faces") int faces,
+                            @RequestParam("jogadas") int jogadas,
                             Model model){
-        // instanciar o model com metodo jogar dados que recebe dois parametros jogadas e faces.
-        // adiciona no model os dados, soma e maximo para a view usando o addAttribute do model.
+        M_Jogada m_jogada = S_Dados.jogarDados(jogadas, faces);
+        model.addAttribute("dados",m_jogada.getDados());
+        model.addAttribute("soma",m_jogada.getSoma());
+        model.addAttribute("maximo",m_jogada.getMaximo());
         return "Index/index";
     }
 }
